@@ -18,6 +18,19 @@ configurations {
 	}
 }
 
+bootBuildImage {
+	imageName = "${project.name}"
+	environment = ["BP_JVM_VERSION" : "17.*"]
+
+	docker {
+		publishRegistry {
+			username = project.findProperty("registryUsername")
+			password = project.findProperty("registryToken")
+			url = project.findProperty("registryUrl")
+		}
+	}
+}
+
 ext {
 	set('springCloudVersion', "2022.0.2")
 	set('testcontainersVersion', "1.17.3")
